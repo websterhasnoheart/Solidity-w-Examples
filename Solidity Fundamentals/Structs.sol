@@ -22,4 +22,21 @@ contract Todos {
     }
 
     //Solidity automatically creates a getter functions for 'todos'
+    // Therefore, the following function is not needed
+    function get(uint _index) public view returns (string memory text, bool completed) {
+        Todo storage todo = todos[_index];
+        return (todo.text, todo.completed);
+    }
+
+    //update text
+    // calldata is an immutable temporary location where function arguments are stored
+    function updateText(uint _index, string calldata _text) public {
+        Todo storage todo = todos[_index];
+        todo.text = _text;
+    }
+
+    function toggleCompleted(uint _index) public {
+        Todo storage todo = todos[_index];
+        todo.completed = !todo.completed;
+    }
 }
